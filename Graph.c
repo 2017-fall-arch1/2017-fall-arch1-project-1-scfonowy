@@ -42,11 +42,23 @@ void removeEdge(Graph* graph, char from, char to) {
   
   while (current->next != 0) {
     if (current->next->name == to) {
+      GraphNode* del = current->next;
       current->next = current->next->next;
-      deleteGraphNode(current->next);
+      del->next = 0;
+      deleteGraphNode(del);
       return;
     }
   }
   
+  return;
+}
+
+// deletes the passed graph
+void deleteGraph(Graph* graph) {
+  int i;
+  for (i = 0; i < GRAPH_SIZE_LIMIT; i++) {
+    deleteGraphNode(graph->edge_list[i]);
+  }
+  free(graph);
   return;
 }

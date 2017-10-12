@@ -12,5 +12,9 @@ GraphNode* newGraphNode(char name) {
 // deletes the passed graph node
 // param node :: the node to be deleted
 void deleteGraphNode(GraphNode* node) {
+  if (node == 0) {
+    return;
+  }
+  deleteGraphNode(node->next);
   free(node);
 }

@@ -42,4 +42,8 @@ void bfs(Graph* graph, char from, char to);
 // param to :: the name of the destination node
 void dfs(Graph* graph, char from, char to);
 
+// deletes the passed graph
+// param graph :: the graph to delete
+void deleteGraph(Graph* graph);
+
 #endif
