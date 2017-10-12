@@ -8,7 +8,7 @@ extern const short NODE_INDEX_OFFSET;
 
 // definition of the graph
 typedef struct Graph {
-  GraphNode *edge_list[GRAPH_SIZE_LIMIT];
+  GraphNode *edge_list[26];
 } Graph;
 
 // creates and returns a new, empty graph
