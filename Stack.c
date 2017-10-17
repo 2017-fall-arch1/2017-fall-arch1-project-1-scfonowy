@@ -6,6 +6,7 @@
 // creates a new stack
 Stack* newStack(void)  {
   Stack* stack = (Stack* )malloc(sizeof(Stack));
+  stack->head = NULL;
   stack->size = 0;
   return stack;
 }
@@ -24,6 +25,7 @@ char pop(Stack* stack) {
   StackNode* oldHead = stack->head;
   stack->head = oldHead->next;
   stack->size -= 1;
+  oldHead->next = NULL; 
   return unwrapDataNode(oldHead);
 }
 
@@ -75,6 +77,7 @@ bool inStack(Stack* stack, char data) {
   }
   
   StackNode* current = stack->head;
+  
   while (current != NULL) {
     if (current->data == data) {
       return true;
