@@ -2,14 +2,17 @@ all: main
 
 CFLAGS=-g -O3
 
-main: main.o
+main: main.o Graph.o GraphNode.o Stack.o Queue.o DataNode.o
 	cc -o $@ $^
 
 main.o: main.c Graph.o
 	cc -c $(CFLAGS) main.c
 
-Graph.o: Graph.c Graph.h Stack.o Queue.o
+Graph.o: Graph.c Graph.h GraphNode.o Stack.o Queue.o
 	cc -c $(CFLAGS) Graph.c
+
+GraphNode.o: GraphNode.c GraphNode.h
+	cc -c $(CFLAGS) GraphNode.c
 
 Stack.o: Stack.c Stack.h DataNode.o
 	cc -c $(CFLAGS) Stack.c

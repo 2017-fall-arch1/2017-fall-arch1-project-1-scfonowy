@@ -95,6 +95,8 @@ void breadthTraversal(Graph* graph, char from) {
   }
   
   printf("Traversal completed.\r\n");
+  deleteQueue(fringe);
+  deleteQueue(visited);
   return;
 }
 
@@ -134,6 +136,8 @@ void depthTraversal(Graph* graph, char from) {
   }
   
   printf("Traversal completed.\r\n");
+  deleteStack(fringe);
+  deleteStack(visited);
   return;
 }
 

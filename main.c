@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
@@ -75,24 +76,28 @@ Graph* loadGraphFromFile(char* filepath) {
 
 void printOptions() {
   printf("MAIN MENU\r\n");
-  printf("1 - TRAVERSE GRAPH\r\n");
-  printf("2 - ADD EDGE\r\n");
-  printf("3 - REMOVE EDGE\r\n");
-  printf("4 - SAVE GRAPH\r\n");
-  printf("5 - LOAD NEW GRAPH\r\n");
-  printf("6 - PRINT GRAPH\r\n");
+  printf("1 - DEPTH-TRAVERSE GRAPH\r\n");
+  printf("2 - BREADTH-TRAVERSE GRAPH\r\n");
+  printf("3 - ADD EDGE\r\n");
+  printf("4 - REMOVE EDGE\r\n");
+  printf("5 - SAVE GRAPH\r\n");
+  printf("6 - LOAD NEW GRAPH\r\n");
+  printf("7 - PRINT GRAPH\r\n");
   printf("0 - QUIT\r\n");
   printf("ENTER OPTION >> ");
 }
 
 // prompts user for input node and traverses graph
 // param graph :: the graph to traverse
-void traverseGraph(Graph* graph) {
+void traverseGraph(Graph* graph, bool isBreadth) {
   char node;
   printf("Enter node to begin from, e.g. A, B, C... >>");
   scanf(" %c", &node);
-  breadthTraversal(graph, node);
-  depthTraversal(graph, node);
+  if (isBreadth == true) {
+    breadthTraversal(graph, node);
+  } else {
+    depthTraversal(graph, node);
+  }
 }
 
 // prompts user for edges to add and adds them to the graph
@@ -167,12 +172,13 @@ int main() {
     printOptions();
     scanf(" %d", &option); // get option
     switch (option) {
-      case 1: traverseGraph(graph); break;
-      case 2: addInputEdge(graph); break;
-      case 3: removeInputEdge(graph); break;
-      case 4: saveGraph(graph); break;
-      case 5: loadNewGraph(graph); break;
-      case 6: printGraph(graph); break;
+      case 1: traverseGraph(graph, false); break;
+      case 2: traverseGraph(graph, true); break;
+      case 3: addInputEdge(graph); break;
+      case 4: removeInputEdge(graph); break;
+      case 5: saveGraph(graph); break;
+      case 6: loadNewGraph(graph); break;
+      case 7: printGraph(graph); break;
       case 0: break;
       default: printf("Invalid option.\r\n"); break;
     }
