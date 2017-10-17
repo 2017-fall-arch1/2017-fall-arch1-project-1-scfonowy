@@ -34,24 +34,26 @@ void removeEdge(Graph* graph, char from, char to) {
   int i = from - NODE_INDEX_OFFSET;
   GraphNode* current = graph->edge_list[i];
 
-  if (current == 0) { // nothing to delete
+  if (current == NULL) { // nothing to delete
     return;
   }
 
   if (current->name == to) { // fringe case
     graph->edge_list[i] = current->next;
+    current->next = NULL;
     deleteGraphNode(current);
     return;
   }
   
-  while (current->next != 0) {
+  while (current->next != NULL) {
     if (current->next->name == to) {
       GraphNode* del = current->next;
-      current->next = current->next->next;
-      del->next = 0;
+      current->next = del->next;
+      del->next = NULL;
       deleteGraphNode(del);
       return;
     }
+    current = current->next;
   }
   
   return;
@@ -137,6 +139,10 @@ void depthTraversal(Graph* graph, char from) {
 
 // deletes the passed graph
 void deleteGraph(Graph* graph) {
+  if (graph == NULL) {
+    return;
+  }
+  
   int i;
   for (i = 0; i < GRAPH_SIZE_LIMIT; i++) {
     deleteGraphNode(graph->edge_list[i]);
@@ -147,10 +153,18 @@ void deleteGraph(Graph* graph) {
 
 // prints all edges in the graph
 void printGraph(Graph* graph) {
+  if (graph == NULL) {
+    printf("Attempted to print empty graph.\r\n");
+    return;
+  }
+  
   char i;
   for (i = 0; i < GRAPH_SIZE_LIMIT; i++) {
-    printf("Edges leaving %c:\r\n", i+NODE_INDEX_OFFSET);
     GraphNode* edge = graph->edge_list[i];
+    if (edge == NULL) { // don't print if no edges exist
+      continue;
+    }
+    printf("Edges leaving %c:\r\n", i+NODE_INDEX_OFFSET);
     while (edge != NULL) {
       printf("- %c\r\n", edge->name);
       edge = edge->next;
