@@ -24,6 +24,6 @@ DataNode.o: DataNode.c DataNode.h
 	cc -c $(CFLAGS) DataNode.c
 
 clean:
-	rm -f *.o main
+	rm -f *.o main *~
 
 

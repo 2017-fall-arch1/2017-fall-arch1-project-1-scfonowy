@@ -162,8 +162,8 @@ void saveGraph(Graph* graph) {
 	fprintf(fp, "%c ", edge->name);
 	edge = edge->next;
       }
-      fprintf(fp, "!\r\n");
     }
+    fprintf(fp, "!\r\n");
   }
   fclose(fp);
   return;
