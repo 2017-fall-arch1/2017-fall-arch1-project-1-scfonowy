@@ -12,7 +12,7 @@ typedef struct Graph {
 } Graph;
 
 // creates and returns a new, empty graph
-Graph* newGraph();
+Graph* newGraph(void);
 
 // adds a unidirectional edge between the two nodes
 // param graph :: the graph to update
@@ -26,24 +26,22 @@ void addEdge(Graph* graph, char from, char to);
 // param to :: the destination node
 void removeEdge(Graph* graph, char from, char to);
 
-// performs BFS on the graph,
-// printing steps of path if it exists,
-// or printing that it does not exist.
+// performs a breadth-first traversal on the graph
 // param graph :: the graph being searched
 // param from :: the name of the node to start from
-// param to :: the name of the destination node
-void bfs(Graph* graph, char from, char to);
+void breadthTraversal(Graph* graph, char from);
 
-// performs DFS on the graph,
-// printing steps of the path if it exists,
-// or printing that it does not exist.
+//performs a depth-first traversal on the graph
 // param graph :: the graph being searched
 // param from :: the name of the node to start from
-// param to :: the name of the destination node
-void dfs(Graph* graph, char from, char to);
+void depthTraversal(Graph* graph, char from);
 
 // deletes the passed graph
 // param graph :: the graph to delete
 void deleteGraph(Graph* graph);
+
+// prints all edges in the graph
+// param graph :: graph to print
+void printGraph(Graph* graph);
 
 #endif
