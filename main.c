@@ -74,6 +74,7 @@ Graph* loadGraphFromFile(char* filepath) {
   return graph;
 }
 
+// prints all the menu options
 void printOptions() {
   printf("MAIN MENU\r\n");
   printf("1 - DEPTH-TRAVERSE GRAPH\r\n");
@@ -81,8 +82,7 @@ void printOptions() {
   printf("3 - ADD EDGE\r\n");
   printf("4 - REMOVE EDGE\r\n");
   printf("5 - SAVE GRAPH\r\n");
-  printf("6 - LOAD NEW GRAPH\r\n");
-  printf("7 - PRINT GRAPH\r\n");
+  printf("6 - PRINT GRAPH\r\n");
   printf("0 - QUIT\r\n");
   printf("ENTER OPTION >> ");
 }
@@ -153,14 +153,19 @@ void removeInputEdge(Graph* graph) {
 // saves the passed graph to a file
 // param graph :: the graph to save
 void saveGraph(Graph* graph) {
-  printf("SAVE GRAPH HERE\r\n");
-  return;
-}
-
-// loads a graph from file into the graph pointer
-// param graph :: the pointer to the new graph object
-void loadNewGraph(Graph* graph) {
-  printf("LOAD NEW GRAPH HERE\r\n");
+  fp = fopen("edges.txt", "w+");
+  int i;
+  for (i = 0; i < GRAPH_SIZE_LIMIT; i++) {
+    if (graph->edge_list[i] != NULL) {
+      GraphNode* edge = graph->edge_list[i];
+      while(edge != NULL) {
+	fprintf(fp, "%c ", edge->name);
+	edge = edge->next;
+      }
+      fprintf(fp, "!\r\n");
+    }
+  }
+  fclose(fp);
   return;
 }
 
@@ -177,8 +182,7 @@ int main() {
       case 3: addInputEdge(graph); break;
       case 4: removeInputEdge(graph); break;
       case 5: saveGraph(graph); break;
-      case 6: loadNewGraph(graph); break;
-      case 7: printGraph(graph); break;
+      case 6: printGraph(graph); break;
       case 0: break;
       default: printf("Invalid option.\r\n"); break;
     }

@@ -168,11 +168,12 @@ void printGraph(Graph* graph) {
     if (edge == NULL) { // don't print if no edges exist
       continue;
     }
-    printf("Edges leaving %c:\r\n", i+NODE_INDEX_OFFSET);
+    printf("Edges leaving %c:\r\n -", i+NODE_INDEX_OFFSET);
     while (edge != NULL) {
-      printf("- %c\r\n", edge->name);
+      printf(" %c", edge->name);
       edge = edge->next;
     }
+    printf("\r\n");
   }
   return;
 }
