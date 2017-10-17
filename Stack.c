@@ -6,6 +6,7 @@
 // creates a new stack
 Stack* newStack(void)  {
   Stack* stack = (Stack* )malloc(sizeof(Stack));
+  stack->head = NULL;
   stack->size = 0;
   return stack;
 }
