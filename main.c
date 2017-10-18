@@ -12,11 +12,11 @@ char buf[BUFSIZE];
 FILE *fp;
 int bufp = 0;
 
-int getchar() {
+int getch() {
   return (bufp > 0) ? buf[--bufp] : fgetc(fp);
 }
 
-void ungetchar(int c) {
+void ungetch(int c) {
   if (bufp >= BUFSIZE) {
     printf("too many characters\r\n");
   } else {
@@ -28,7 +28,7 @@ int getword(char *word, int lim) {
   int c;
   char *w = word;
   
-  while(isspace(c = getchar()));
+  while(isspace(c = getch()));
   if (c != EOF) {
     *w++ = c;
   }
@@ -37,8 +37,8 @@ int getword(char *word, int lim) {
     return c;
   }
   for ( ; --lim > 0; w++) {
-    if (!isalnum(*w = getchar())) {
-      ungetchar(*w);
+    if (!isalnum(*w = getch())) {
+      ungetch(*w);
       break;
     }
   }
@@ -175,6 +175,7 @@ int main() {
   int option;
   do {
     printOptions();
+    option = -1;
     scanf(" %d", &option); // get option
     switch (option) {
       case 1: traverseGraph(graph, false); break;
@@ -186,6 +187,7 @@ int main() {
       case 0: break;
       default: printf("Invalid option.\r\n"); break;
     }
+    while ((getchar()) != '\n'); // clear input
   } while (option != 0);
   printf("Terminating...\r\n");
   return 0;
